@@ -1,5 +1,5 @@
 
-package com.reactlibrary;
+package com.palmmob.yunqing_rn;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -10,10 +10,15 @@ import com.facebook.react.bridge.NativeModule;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.uimanager.ViewManager;
 import com.facebook.react.bridge.JavaScriptModule;
+
 public class RNYunqingadPackage implements ReactPackage {
     @Override
     public List<NativeModule> createNativeModules(ReactApplicationContext reactContext) {
-      return Arrays.<NativeModule>asList(new RNYunqingadModule(reactContext));
+      return Arrays.<NativeModule>asList(
+              new RNYunqingadModule(reactContext),
+              new AdManager(reactContext),
+              new RewardVideo(reactContext)
+      );
     }
 
     // Deprecated from RN 0.47
@@ -23,6 +28,8 @@ public class RNYunqingadPackage implements ReactPackage {
 
     @Override
     public List<ViewManager> createViewManagers(ReactApplicationContext reactContext) {
-      return Collections.emptyList();
+      return Arrays.<ViewManager>asList(
+              new BannerAdViewManager(reactContext)
+      );
     }
 }

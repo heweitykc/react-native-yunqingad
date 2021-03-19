@@ -32,5 +32,10 @@ repositories {
 
 dependencies {
     compile 'com.facebook.react:react-native:+'
+    implementation 'com.android.support:multidex-instrumentation:1.0.3'
+
+    // 广告
+    implementation fileTree(include: ['*.jar', '*.aar'], dir: 'libs_yd/ad')
+    implementation 'com.github.bumptech.glide:glide:4.9.0'
 }
   

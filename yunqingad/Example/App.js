@@ -16,6 +16,7 @@ import {
   Text,
   useColorScheme,
   View,
+  TouchableHighlight
 } from 'react-native';
 
 import {
@@ -26,65 +27,73 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 
-const Section = ({children, title}): Node => {
-  const isDarkMode = useColorScheme() === 'dark';
-  return (
-    <View style={styles.sectionContainer}>
-      <Text
-        style={[
-          styles.sectionTitle,
-          {
-            color: isDarkMode ? Colors.white : Colors.black,
-          },
-        ]}>
-        {title}
-      </Text>
-      <Text
-        style={[
-          styles.sectionDescription,
-          {
-            color: isDarkMode ? Colors.light : Colors.dark,
-          },
-        ]}>
-        {children}
-      </Text>
-    </View>
+import {adInit, loadRewardVideo, BannerAd} from './ADMgr';
+
+adInit();
+
+showad = () => {
+  const rewardVideo = loadRewardVideo({
+    "adid" : "dev_android_gdt_stimulatevideo"
+  })
+  console.log('loadRewardVideo');
+  rewardVideo.subscribe('onAdLoaded', (e) => {
+      console.log('onAdLoaded')
+    }
   );
-};
+  rewardVideo.subscribe('onAdClose', (e) => {
+      console.log('onAdClose')
+    }
+  );  
+  rewardVideo.subscribe('onVideoReward', (e) => {
+      console.log('onVideoReward')
+    }
+  ); 
+  rewardVideo.subscribe('onVideoComplete', (e) => {
+      console.log('onVideoComplete')
+    }
+  ); 
+  rewardVideo.subscribe('onAdClick', (e) => {
+      console.log('onAdClick')
+    }
+  ); 
+  rewardVideo.subscribe('onSkipVideo', (e) => {
+      console.log('onSkipVideo')
+    }
+  );
+  rewardVideo.subscribe('onAdError', (e) => {
+      console.log('onAdError')
+    }
+  );  
+}
 
 const App: () => Node = () => {
-  const isDarkMode = useColorScheme() === 'dark';
-
   const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
+    backgroundColor:  Colors.lighter,
   };
 
   return (
     <SafeAreaView style={backgroundStyle}>
-      <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
+      <StatusBar />
       <ScrollView
         contentInsetAdjustmentBehavior="automatic"
         style={backgroundStyle}>
         <Header />
         <View
           style={{
-            backgroundColor: isDarkMode ? Colors.black : Colors.white,
+            backgroundColor:  Colors.white,
           }}>
-          <Section title="Step One">
-            Edit <Text style={styles.highlight}>App.js</Text> to change this
-            screen and then come back to see your edits.
-          </Section>
-          <Section title="See Your Changes">
-            <ReloadInstructions />
-          </Section>
-          <Section title="Debug">
-            <DebugInstructions />
-          </Section>
-          <Section title="Learn More">
-            Read the docs to discover what to do next:
-          </Section>
-          <LearnMoreLinks />
         </View>
+        <TouchableHighlight style={styles.login_phone} underlayColor='transparent' activeOpacity={0.95} onPress={showad}>
+            <Text style={styles.login_phone_t}>{'手机号快速登录>'}</Text>
+        </TouchableHighlight>                
+          <BannerAd
+              adWidth={314}
+              adHeight={50}
+              mediaId={'beta_android_banner'} 
+          />              
+      <TouchableHighlight style={styles.login_phone} underlayColor='transparent' activeOpacity={0.95} onPress={showad}>
+            <Text style={styles.login_phone_t}>{'111注册ssss11122211ss>'}</Text>
+        </TouchableHighlight>                
       </ScrollView>
     </SafeAreaView>
   );

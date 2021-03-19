@@ -22,7 +22,7 @@ const EVENT_TYPE = {
 
 //初始化
 const adInit = () => {
-    AdManager.init({})
+    AdManager.init({"channelid" : "demo-channel-id"})
 }
 
 //开屏
@@ -82,13 +82,13 @@ const loadRewardVideo = (options) => {
 const Banner = requireNativeComponent('BannerAd')
 
 const BannerAd = (props) => {
-    const { mediaId, adWidth = 150, onAdLayout, onAdError, onAdClose, onAdClick } = props
-    const [height, setHeight] = React.useState(0)
+    const { mediaId, adWidth, adHeight, onAdLoaded, onAdError, onAdClose, onAdClick } = props    
     return (
         <Banner
             mediaId={mediaId}
             adWidth={adWidth}
-            style={{ width: adWidth, height }}
+            adHeight={adHeight}
+            style={{ width: adWidth, height:adHeight }}
             onAdError={(e) => {
                 onAdError && onAdError(e.nativeEvent)
             }}
@@ -98,11 +98,8 @@ const BannerAd = (props) => {
             onAdClose={(e) => {
                 onAdClose && onAdClose(e.nativeEvent)
             }}
-            onAdLayout={(e) => {
-                if (e.nativeEvent.height) {
-                    setHeight(e.nativeEvent.height)
-                    onAdLayout && onAdLayout(e.nativeEvent)
-                }
+            onAdLoaded={(e) => {
+                onAdLoaded && onAdLoaded(e.nativeEvent)
             }}
         />
     )
