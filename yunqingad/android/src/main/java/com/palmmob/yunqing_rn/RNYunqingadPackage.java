@@ -15,7 +15,6 @@ public class RNYunqingadPackage implements ReactPackage {
     @Override
     public List<NativeModule> createNativeModules(ReactApplicationContext reactContext) {
       return Arrays.<NativeModule>asList(
-              new RNYunqingadModule(reactContext),
               new AdManager(reactContext),
               new RewardVideo(reactContext),
               new SplashAd(reactContext)

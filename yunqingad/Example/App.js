@@ -113,7 +113,7 @@ const App: () => Node = () => {
               adHeight={50}
               mediaId={'beta_android_banner'} 
           />     
-          
+          <View style={{height:100}} ></View>
       <TouchableHighlight style={styles.login_phone} underlayColor='transparent' activeOpacity={0.95} onPress={showsplash}>
             <Text style={styles.login_phone_t}>{'打开启动屏>'}</Text>
         </TouchableHighlight>                

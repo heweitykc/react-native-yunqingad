@@ -1,14 +1,22 @@
 package com.palmmob.yunqing_rn.activities;
 
 
+import android.content.pm.ActivityInfo;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Message;
 import android.view.KeyEvent;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
+
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
+import com.bumptech.glide.request.RequestOptions;
 import com.palmmob.yunqing_rn.AdManager;
 import com.palmmob.yunqing_rn.R;
 import com.palmmob.yunqing_rn.WeakHandler;
@@ -46,7 +54,6 @@ public class SplashActivity extends AppCompatActivity implements WeakHandler.IHa
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
-        mSplashContainer = this.findViewById(R.id.splash_container);
 
         // 读取 code id
         Bundle extras = getIntent().getExtras();
@@ -58,12 +65,54 @@ public class SplashActivity extends AppCompatActivity implements WeakHandler.IHa
         // TTAdManagerHolder.getInstance(this).requestPermissionIfNecessary(this);
 
         // 定时，AD_TIME_OUT时间到时执行，如果开屏广告没有加载则跳转到主页面
-        mHandler.sendEmptyMessageDelayed(MSG_GO_MAIN, countdown);
+        mHandler.sendEmptyMessageDelayed(MSG_GO_MAIN, countdown*1000);
+
+        initView();
 
         // 加载开屏广告
         loadSplashAd();
     }
 
+    // 初始化开屏广告 View
+    private void initView() {
+        // 初始化广告渲染组件
+        mSplashContainer = this.findViewById(R.id.splash_container);
+
+        // 设置软件底部 icon，title
+        try {
+            ActivityInfo appInfo = getPackageManager().getActivityInfo(this.getComponentName(),
+                    PackageManager.GET_META_DATA);
+
+            RoundedCorners roundedCorners = new RoundedCorners(20);
+            // 通过RequestOptions扩展功能,override:采样率,因为ImageView就这么大,可以压缩图片,降低内存消耗
+            RequestOptions options = RequestOptions.bitmapTransform(roundedCorners).override(300, 300);
+            ImageView splashIcon = findViewById(R.id.splash_icon);
+            Glide.with(this).load(appInfo.loadIcon(getPackageManager())).apply(options).into(splashIcon);
+            // 设置 appIcon
+
+            Bundle bundle = appInfo.metaData;
+
+            if (bundle != null) {
+
+                String splashTitle = bundle.getString("splash_title");
+                // 获取标题
+
+                int splashTitleColor = bundle.getInt("splash_title_color");
+                // 获取标题颜色
+
+                TextView splashName = findViewById(R.id.splash_name);
+                if (splashTitle != null) {
+                    splashName.setText(splashTitle);
+                }
+                if (splashTitleColor != 0) {
+                    splashName.setTextColor(splashTitleColor);
+                }
+            }
+
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
 
     private void loadSplashAd() {
 

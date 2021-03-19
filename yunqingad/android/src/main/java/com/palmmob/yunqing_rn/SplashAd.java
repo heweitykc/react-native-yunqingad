@@ -32,25 +32,22 @@ public class SplashAd extends ReactContextBaseJavaModule {
     @ReactMethod
     public void loadSplashAdHalf(ReadableMap options) {
         String codeid = options.hasKey("adid") ? options.getString("adid") : null;
-        int countdown = options.hasKey("countdown") ? options.getInt("countdown") : null;
-        String provider = options.hasKey("provider") ? options.getString("provider") : "头条";
-
-        Log.d(TAG, "provider:" + provider + ", codeid:" + codeid);
+        int countdown = options.hasKey("countdown") ? options.getInt("countdown") : 5;
 
         startSplash(codeid, countdown);
     }
 
     private void startSplash(String codeid, int countdown) {
         Intent intent = new Intent(mContext, SplashActivity.class);
-        try {
+//        try {
             intent.putExtra("codeid", codeid);
             intent.putExtra("countdown", countdown);
             final Activity context = getCurrentActivity();
             context.startActivity(intent);
 
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
     }
 
 }

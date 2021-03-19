@@ -13,13 +13,19 @@
         android:layout_weight="0.88"
         android:orientation="vertical"
         >
-        <RelativeLayout
-            android:id="@+id/splash_container"
+        <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="#FFFFFF"
             >
-        </RelativeLayout>
+            <RelativeLayout
+                android:id="@+id/splash_container"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#FFFFFF"
+                >
+            </RelativeLayout>
+        </FrameLayout>
     </LinearLayout>
 
     <LinearLayout
