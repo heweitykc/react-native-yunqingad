@@ -27,7 +27,7 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 
-import {adInit, loadRewardVideo, BannerAd} from './ADMgr';
+import {adInit, loadRewardVideo, BannerAd, loadSplash_half} from './ADMgr';
 
 adInit();
 
@@ -66,6 +66,28 @@ showad = () => {
   );  
 }
 
+showsplash = () => {  
+  const splash = loadSplash_half({
+    "adid" : "beta_android_splash",
+    "countdown" : 5
+  })
+  splash.subscribe('onAdLoaded', (e) => {
+    console.log(e)
+  })
+  splash.subscribe('onAdClose', (e) => {
+    console.log(e)
+  })  
+  splash.subscribe('onAdClick', (e) => {
+    console.log(e)
+  })  
+  splash.subscribe('onSkip', (e) => {
+    console.log(e)
+  })   
+  splash.subscribe('onAdError', (e) => {
+    console.log(e)
+  })       
+}
+
 const App: () => Node = () => {
   const backgroundStyle = {
     backgroundColor:  Colors.lighter,
@@ -84,22 +106,28 @@ const App: () => Node = () => {
           }}>
         </View>
         <TouchableHighlight style={styles.login_phone} underlayColor='transparent' activeOpacity={0.95} onPress={showad}>
-            <Text style={styles.login_phone_t}>{'手机号快速登录>'}</Text>
-        </TouchableHighlight>                
-          <BannerAd
+            <Text style={styles.login_phone_t}>{'打开悬赏>'}</Text>
+        </TouchableHighlight>                         
+        <BannerAd
               adWidth={314}
               adHeight={50}
               mediaId={'beta_android_banner'} 
-          />              
-      <TouchableHighlight style={styles.login_phone} underlayColor='transparent' activeOpacity={0.95} onPress={showad}>
-            <Text style={styles.login_phone_t}>{'111注册ssss11122211ss>'}</Text>
+          />     
+          
+      <TouchableHighlight style={styles.login_phone} underlayColor='transparent' activeOpacity={0.95} onPress={showsplash}>
+            <Text style={styles.login_phone_t}>{'打开启动屏>'}</Text>
         </TouchableHighlight>                
+
+        
       </ScrollView>
     </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
+  login_phone_t : {
+    fontSize:30
+  },
   sectionContainer: {
     marginTop: 32,
     paddingHorizontal: 24,

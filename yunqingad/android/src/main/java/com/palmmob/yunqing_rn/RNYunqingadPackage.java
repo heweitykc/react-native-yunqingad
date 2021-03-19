@@ -17,7 +17,8 @@ public class RNYunqingadPackage implements ReactPackage {
       return Arrays.<NativeModule>asList(
               new RNYunqingadModule(reactContext),
               new AdManager(reactContext),
-              new RewardVideo(reactContext)
+              new RewardVideo(reactContext),
+              new SplashAd(reactContext)
       );
     }
 
