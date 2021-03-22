@@ -1,6 +1,15 @@
+import {
+    NativeModules,
+    requireNativeComponent
+} from 'react-native';
 
-import { NativeModules } from 'react-native';
+const { AdManager, SplashAd, RewardVideoAd } = NativeModules
 
-const { RNYunqingad } = NativeModules;
+const Banner = requireNativeComponent('BannerAd')
 
-export default RNYunqingad;
+export {
+    AdManager,
+    SplashAd,
+    RewardVideoAd,
+    Banner
+}
