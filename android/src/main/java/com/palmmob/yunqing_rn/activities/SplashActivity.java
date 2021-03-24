@@ -48,7 +48,6 @@ public class SplashActivity extends AppCompatActivity implements WeakHandler.IHa
 
     private String code_id;
     private int countdown;
-    private boolean canJump = false;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -115,7 +114,7 @@ public class SplashActivity extends AppCompatActivity implements WeakHandler.IHa
     }
 
     private void loadSplashAd() {
-
+        mHasLoaded = false;
         ydSpread = new YdSpread.Builder(this)
                 .setKey(code_id)
                 .setCountdownSeconds(countdown)
@@ -125,7 +124,7 @@ public class SplashActivity extends AppCompatActivity implements WeakHandler.IHa
                     @Override
                     public void onClick(View v) {
                         AdManager.sendEvent(EVT_SKIPVIDEO, "跳过");
-                        doJump();
+                        jumpToMain();
                     }
                 })
                 .setContainer(mSplashContainer)
@@ -139,7 +138,6 @@ public class SplashActivity extends AppCompatActivity implements WeakHandler.IHa
                     @Override
                     public void onAdClose() {
                         mHasLoaded = true;
-                        AdManager.sendEvent(EVT_ADCLOSE, "关闭");
                         jumpToMain();
                     }
 
@@ -153,6 +151,7 @@ public class SplashActivity extends AppCompatActivity implements WeakHandler.IHa
                     public void onAdFailed(YdError error) {
                         // 广告异常、失败，中断时会调用
                         AdManager.sendEvent(EVT_ADERROR, "加载错误");
+                        jumpToMain();
                     }
 
                 })
@@ -161,16 +160,14 @@ public class SplashActivity extends AppCompatActivity implements WeakHandler.IHa
     }
 
     private void jumpToMain() {
-        if (canJump) {
-            doJump();
-        } else {
-            canJump = true;
+        if (mSplashContainer != null) {
+            mSplashContainer.removeAllViews();
         }
+        this.overridePendingTransition(0, 0); // 不要过渡动画
+        this.finish();
+        AdManager.sendEvent(EVT_ADCLOSE, "关闭");
     }
 
-    private void doJump() {
-        this.goToMainActivity();
-    }
 
     @Override
     protected void onDestroy() {
@@ -178,30 +175,6 @@ public class SplashActivity extends AppCompatActivity implements WeakHandler.IHa
         if (ydSpread != null) {
             ydSpread.destroy();
         }
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        canJump = false;
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        if (canJump) {
-            doJump();
-        }
-        canJump = true;
-    }
-
-    // 关闭开屏广告方法
-    private void goToMainActivity() {
-        if (mSplashContainer != null) {
-            mSplashContainer.removeAllViews();
-        }
-        this.overridePendingTransition(0, 0); // 不要过渡动画
-        this.finish();
     }
 
     private void showToast(String msg) {
@@ -213,7 +186,7 @@ public class SplashActivity extends AppCompatActivity implements WeakHandler.IHa
         if (msg.what == MSG_GO_MAIN) {
             if (!mHasLoaded) {
                 showToast("加载超时");
-                goToMainActivity();
+                jumpToMain();
             }
         }
     }
