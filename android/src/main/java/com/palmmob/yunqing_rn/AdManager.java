@@ -49,6 +49,14 @@ public class AdManager extends ReactContextBaseJavaModule {
             }
         });
     }
+    
+    @ReactMethod
+    public void initInfo(final ReadableMap options, final Promise promise) {
+        AdManager.initPromise = promise;
+        AdManager.vuid     = options.getString("vuid");
+        AdManager.nickname = options.getString("nickname");
+        AdManager.initPromise.resolve(true);
+    }
 
     @ReactMethod
     public void logout(final ReadableMap options, final Promise promise) {
