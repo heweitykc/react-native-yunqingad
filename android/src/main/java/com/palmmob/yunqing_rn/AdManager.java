@@ -42,7 +42,7 @@ public class AdManager extends ReactContextBaseJavaModule {
             @Override
             public void run() {
                 Context app = AdManager.this.reactAppContext.getApplicationContext();
-                YdConfig.getInstance().init(app, options.getString("channelid"), true);
+                YdConfig.getInstance().init(app, options.getString("channelid"), options.getBoolean("isdebug"));
                 AdManager.initPromise.resolve(true);
             }
         });
