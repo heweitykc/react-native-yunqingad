@@ -50,6 +50,12 @@ public class AdManager extends ReactContextBaseJavaModule {
         });
     }
 
+    @ReactMethod
+    public void logout(final ReadableMap options, final Promise promise) {
+        AdManager.vuid     = null;
+        AdManager.nickname = null;
+    }
+
     // 发送事件到RN
     static public void sendEvent(String eventName, String message) {
         WritableMap p = Arguments.createMap();
