@@ -43,8 +43,6 @@ public class AdManager extends ReactContextBaseJavaModule {
             public void run() {
                 Context app = AdManager.this.reactAppContext.getApplicationContext();
                 YdConfig.getInstance().init(app, options.getString("channelid"), true);
-                AdManager.vuid     = options.getString("vuid");
-                AdManager.nickname = options.getString("nickname");
                 AdManager.initPromise.resolve(true);
             }
         });
