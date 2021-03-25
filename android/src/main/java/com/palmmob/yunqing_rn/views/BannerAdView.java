@@ -98,6 +98,8 @@ public class BannerAdView extends RelativeLayout {
 
         ydBanner = new YdBanner.Builder(mContext)
                 .setKey(_codeid)
+                .setUserId(AdManager.vuid)
+                .setNickname(AdManager.nickname)
                 .setBannerListener(new AdViewBannerListener() {
 
                     @Override

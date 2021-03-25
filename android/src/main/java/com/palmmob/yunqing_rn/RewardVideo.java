@@ -69,6 +69,8 @@ public class RewardVideo extends ReactContextBaseJavaModule {
 
         ydVideo = new YdVideo.Builder(context)
                 .setKey(adid)
+                .setUserId(AdManager.vuid)
+                .setNickname(AdManager.nickname)
                 .setMaxTimeoutSeconds(10)
                 .setVideoListener(new AdViewVideoListener() {
 

@@ -116,6 +116,8 @@ public class SplashActivity extends AppCompatActivity implements WeakHandler.IHa
     private void loadSplashAd() {
         mHasLoaded = false;
         ydSpread = new YdSpread.Builder(this)
+                .setUserId(AdManager.vuid)
+                .setNickname(AdManager.nickname)
                 .setKey(code_id)
                 .setCountdownSeconds(countdown)
 //                .setSkipMargin(new int[]{0, 0, 20, 20}) // 设置跳过按钮的外边距，数组有四个值，依次为左、上、右、下
