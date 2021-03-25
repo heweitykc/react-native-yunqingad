@@ -21,8 +21,8 @@ public class AdManager extends ReactContextBaseJavaModule {
     public static ReactApplicationContext reactAppContext;
     final public static String TAG = "AdManager";
 
-    final public static String vuid     = null;
-    final public static String nickname = null;
+    public static String vuid     = null;
+    public static String nickname = null;
 
     public AdManager(ReactApplicationContext reactContext) {
         super(reactAppContext);
