@@ -22,14 +22,14 @@ import com.yd.ydsdk.YdVideo;
 public class RewardVideo extends ReactContextBaseJavaModule {
 
     final private static String TAG = "RewardVideoAd";
-
-    final private static String EVT_ADLOADED       = TAG + "-onAdLoaded";
-    final private static String EVT_ADCLOSE        = TAG + "-onAdClose";
-    final private static String EVT_VIDEOREWARD    = TAG + "-onVideoReward";
-    final private static String EVT_VIDEOCOMPLETE  = TAG + "-onVideoComplete";
-    final private static String EVT_ADCLICK        = TAG + "-onAdClick";
-    final private static String EVT_SKIPVIDEO      = TAG + "-onSkipVideo";
+    
     final private static String EVT_ADERROR        = TAG + "-onAdError";
+    final private static String EVT_ADCLICK        = TAG + "-onAdClick";
+    final private static String EVT_ADCLOSE        = TAG + "-onAdClose";
+    final private static String EVT_SKIPVIDEO      = TAG + "-onAdSkip";
+    final private static String EVT_ADLOADED       = TAG + "-onAdShow";
+    final private static String EVT_VIDEOCOMPLETE  = TAG + "-onAdPlayFinish";
+    final private static String EVT_VIDEOREWARD    = TAG + "-onAdRewardEffective";
 
     private static ReactApplicationContext mContext;
     public static Promise promise;
