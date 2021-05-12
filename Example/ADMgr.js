@@ -22,7 +22,7 @@ const EVENT_TYPE = {
 
 //初始化
 const adInit = () => {
-    AdManager.init({"channelid" : "demo-channel-id"})
+    AdManager.init({"channelid" : "demo-channel-id", "isdebug":true})
 }
 
 //开屏

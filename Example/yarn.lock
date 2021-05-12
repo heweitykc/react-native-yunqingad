@@ -5296,7 +5296,7 @@
 
 "react-native-yunqingad@file:..":
   "resolved" "file:.."
-  "version" "1.4.0"
+  "version" "1.15.0"
 
 "react-native@>=0.62.0-rc.0 <0.64.0", "react-native@~0.63.3":
   "integrity" "sha512-I4kM8kYO2mWEYUFITMcpRulcy4/jd+j9T6PbIzR0FuMcz/xwd+JwHoLPa1HmCesvR1RDOw9o4D+OFLwuXXfmGw=="

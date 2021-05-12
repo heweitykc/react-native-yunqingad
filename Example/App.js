@@ -28,8 +28,10 @@ import {
 } from 'react-native/Libraries/NewAppScreen';
 
 import {adInit, loadRewardVideo, BannerAd, loadSplash_half} from './ADMgr';
+import {gdtInit, loadGDTRewardVideo} from './GDTMgr';
 
 adInit();
+gdtInit({"appid":"1111742437"});
 
 showad = () => {
   const rewardVideo = loadRewardVideo({
@@ -88,6 +90,55 @@ showsplash = () => {
   })       
 }
 
+showad_gdt = () => {
+  const rewardVideo = loadGDTRewardVideo({
+    "adid" : "4011184523738212",
+    "customdata" : "customdata",
+    "uid" : "12121212"
+  })
+
+  console.log('loadGDTRewardVideo');
+  
+  rewardVideo.subscribe('onAdShow', (e) => {
+    console.log('onAdShow')
+    }
+  );
+
+  rewardVideo.subscribe('onAdCached', (e) => {
+    console.log('onAdCached')
+    }
+  );
+  
+  rewardVideo.subscribe('onAdLoaded', (e) => {
+      console.log('onAdLoaded')
+    }
+  );
+  rewardVideo.subscribe('onAdClose', (e) => {
+      console.log('onAdClose')
+    }
+  );  
+  rewardVideo.subscribe('onVideoReward', (e) => {
+      console.log('onVideoReward')
+    }
+  ); 
+  rewardVideo.subscribe('onVideoComplete', (e) => {
+      console.log('onVideoComplete')
+    }
+  ); 
+  rewardVideo.subscribe('onAdClick', (e) => {
+      console.log('onAdClick')
+    }
+  ); 
+  rewardVideo.subscribe('onSkipVideo', (e) => {
+      console.log('onSkipVideo')
+    }
+  );
+  rewardVideo.subscribe('onAdError', (e) => {
+      console.log('onAdError')
+    }
+  );  
+}
+
 const App: () => Node = () => {
   const backgroundStyle = {
     backgroundColor:  Colors.lighter,
@@ -118,7 +169,10 @@ const App: () => Node = () => {
             <Text style={styles.login_phone_t}>{'打开启动屏>'}</Text>
         </TouchableHighlight>                
 
-        
+        <TouchableHighlight style={styles.login_phone} underlayColor='transparent' activeOpacity={0.95} onPress={showad_gdt}>
+            <Text style={styles.login_phone_t}>{'打开GDT悬赏>'}</Text>
+        </TouchableHighlight>                         
+
       </ScrollView>
     </SafeAreaView>
   );
