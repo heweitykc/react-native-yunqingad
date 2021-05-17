@@ -28,10 +28,10 @@ import {
 } from 'react-native/Libraries/NewAppScreen';
 
 import {adInit, loadRewardVideo, BannerAd, loadSplash_half} from './ADMgr';
-import {gdtInit, loadGDTRewardVideo} from './GDTMgr';
+import {initGDT, loadGDTRewardVideo, showGDTRewardVideo} from './GDTMgr';
 
 adInit();
-gdtInit({"appid":"1111742437"});
+initGDT({"appid":"1111750197"});
 
 showad = () => {
   const rewardVideo = loadRewardVideo({
@@ -92,7 +92,7 @@ showsplash = () => {
 
 showad_gdt = () => {
   const rewardVideo = loadGDTRewardVideo({
-    "adid" : "4011184523738212",
+    "adid" : "9091089722944317",
     "customdata" : "customdata",
     "uid" : "12121212"
   })
@@ -105,7 +105,8 @@ showad_gdt = () => {
   );
 
   rewardVideo.subscribe('onAdCached', (e) => {
-    console.log('onAdCached')
+      console.log('onAdCached')
+      showGDTRewardVideo()
     }
   );
   

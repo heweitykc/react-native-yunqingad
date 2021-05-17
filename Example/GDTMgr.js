@@ -21,11 +21,11 @@ const EVENT_TYPE = {
 }
 
 //初始化
-const gdtInit = (options) => {
+const initGDT = (options) => {
     GDTManager.init({"appid" : options['appid']})    
 }
 
-//激励视频
+//加载激励视频
 const loadGDTRewardVideo = (options) => {
     const eventEmitter = new NativeEventEmitter(GDT_RewardVideo);
     let result = GDT_RewardVideo.initAd({"adid":options["adid"]});
@@ -44,7 +44,13 @@ const loadGDTRewardVideo = (options) => {
     }
 }
 
+//展示激励视频
+const showGDTRewardVideo = (options) => {
+    GDT_RewardVideo.showAd(options)
+}
+
 export {
-    gdtInit,
-    loadGDTRewardVideo
+    initGDT,
+    loadGDTRewardVideo,
+    showGDTRewardVideo
 }

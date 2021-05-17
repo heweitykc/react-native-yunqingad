@@ -14,6 +14,7 @@ import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.ReadableMap;
+import com.facebook.react.bridge.UiThreadUtil;
 import com.palmmob.yunqing_rn.AdManager;
 import com.qq.e.ads.rewardvideo.ServerSideVerificationOptions;
 import com.qq.e.ads.rewardvideo2.ExpressRewardVideoAD;
@@ -148,7 +149,12 @@ public class ExpressRewardVideo extends ReactContextBaseJavaModule {
                 .build();
 
         mRewardVideoAD.setServerSideVerificationOptions(server_options);
-        mRewardVideoAD.loadAD();
+        UiThreadUtil.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                mRewardVideoAD.loadAD();
+            }
+        });
         promise.resolve(null);
     }
 
