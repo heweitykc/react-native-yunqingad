@@ -11,5 +11,7 @@ export {
     AdManager,
     SplashAd,
     RewardVideoAd,
-    Banner
+    Banner,
+    GDTManager, 
+    GDT_RewardVideo
 }
